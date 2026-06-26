@@ -7,9 +7,14 @@ type ActionButtonProps = {
 function ActionButton({ text, onClick, disabled }: ActionButtonProps) {
     return (
         <button
+            disabled={disabled}
             onClick={onClick}
-            className={`text-6xl px-6 py-3 mx-4 border-black rounded-lg hover:bg-amber-200 transition
-            ${disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-black hover:text-white"}`}>
+            className={`text-6xl px-6 py-3 mx-4 border-black rounded-lg transition
+            ${disabled
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-black hover:text-white"
+                }`}
+        >
             {text}
         </button>
     );

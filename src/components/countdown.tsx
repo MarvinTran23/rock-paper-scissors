@@ -1,42 +1,51 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type CountdownProps = {
-    seconds: number;
-    onFinish?: () => void;
-}
+  seconds: number;
+  running: boolean;
+  onFinish?: () => void;
+};
 
-function Countdown({ seconds, onFinish}: CountdownProps) {
-    const [count, setCount] = useState(seconds);
+function Countdown({ seconds, running, onFinish }: CountdownProps) {
+  const [count, setCount] = useState(seconds);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-    useEffect(() => {
-        setCount(seconds);
+  const clear = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
 
-        if (seconds <= 0) {
-            onFinish?.();
-            return;
+  useEffect(() => {
+    setCount(seconds);
+  }, [seconds]);
+
+  useEffect(() => {
+    if (!running) {
+      clear();
+      return;
+    }
+
+    clear();
+
+    setCount(seconds);
+
+    intervalRef.current = setInterval(() => {
+      setCount((prev) => {
+        if (prev <= 1) {
+          clear();
+          onFinish?.();
+          return 0;
         }
-
-    
-
-    const interval = setInterval(() => {
-        setCount((prev) => {
-            if (prev <= 1) {
-                clearInterval(interval);
-                onFinish?.();
-                return 0;
-            }
-            return prev - 1;
-        })
+        return prev - 1;
+      });
     }, 1000);
 
-    return () => clearInterval(interval);
-    }, [seconds, onFinish])
+    return clear;
+  }, [running]);
 
-    return (
-        <div className="text-6xl font-bold">
-            {count}
-        </div>
-    );
+  return <div className="text-6xl font-bold">{count}</div>;
 }
 
-export default Countdown
+export default Countdown;
