@@ -6,7 +6,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GameService {
-    private final Random random = new Random();
+    private final Random random;
+
+    public GameService (Random random){
+        this.random = random;
+    }
+
+    public GameService () {
+        this(new Random());
+    }
 
     public GameResponse play(String playerInput) {
         Move playerMove = Move.valueOf(playerInput.toUpperCase());
