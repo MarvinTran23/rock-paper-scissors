@@ -32,18 +32,19 @@ function Countdown({ seconds, running, onFinish }: CountdownProps) {
     setCount(seconds);
 
     intervalRef.current = setInterval(() => {
-      setCount((prev) => {
-        if (prev <= 1) {
-          clear();
-          onFinish?.();
-          return 0;
-        }
-        return prev - 1;
-      });
+      setCount((prev) => prev - 1);
     }, 1000);
 
     return clear;
-  }, [running]);
+  }, [running, seconds]);
+
+  useEffect(() => {
+    if (!running) return;
+    if (count !== 0) return;
+
+    clear();
+    onFinish?.();
+  }, [count, running, onFinish]);
 
   return <div className="text-6xl font-bold">{count}</div>;
 }

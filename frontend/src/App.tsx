@@ -7,18 +7,49 @@ function App() {
   const [finalPick, setFinalPick] = useState<string | null>(null);
   const [isRunning, setIsRunning] = useState(false);
   const [roundKey, setRoundKey] = useState(0);
+  const [gameResult, setGameResult] = useState<any>(null);
 
   const isFinished = finalPick !== null;
 
-  const onFinish = () => {
+  const onFinish = async () => {
     setIsRunning(false);
     setFinalPick(picked);
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/play?choice=${picked}`,
+        {
+          method: "GET",
+        }
+      );
+
+      const data = await response.json();
+      setGameResult(data);
+      console.log("Backend response: ", data);
+
+    } catch (error) {
+      console.log("Error calling backend: ", error);
+    }
+
     console.log(`Zeit ist um! Picked: ${picked}`);
   }
 
   const handlePick = (value: string) => {
     setPicked(value);
     setIsRunning(true);
+  };
+
+  const getResultText = () => {
+    switch (gameResult?.result) {
+      case "WIN":
+        return "You Win!";
+      case "LOSE":
+        return "You Lose!";
+      case "DRAW":
+        return "Draw!";
+      default:
+        return "";
+    }
   };
 
   return (
@@ -75,6 +106,12 @@ function App() {
       </button>
 
       <h2>{finalPick !== null ? finalPick : picked}</h2>
+
+      <h2 className="text-2xl font-bold">
+        {getResultText()}
+      </h2>
+
+      <h2>HELLO WORLD!</h2>
 
     </div>
   )
