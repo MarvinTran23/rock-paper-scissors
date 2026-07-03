@@ -4,6 +4,10 @@ import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
+import com.myproject.rock_paper_scissor_game.rpsgame.enums.Move;
+import com.myproject.rock_paper_scissor_game.rpsgame.enums.WinState;
+
+
 @Service
 public class GameService {
     private final Random random;

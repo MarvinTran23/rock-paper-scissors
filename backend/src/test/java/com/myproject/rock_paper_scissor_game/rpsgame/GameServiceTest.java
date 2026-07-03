@@ -13,6 +13,8 @@ import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.myproject.rock_paper_scissor_game.rpsgame.enums.WinState;
+
 @SpringBootTest
 public class GameServiceTest {
 
