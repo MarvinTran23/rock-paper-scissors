@@ -1,12 +1,12 @@
 # Rock Paper Scissors
 
-A full-stack Rock Paper Scissors web application built with a Java backend and a React frontend. The project demonstrates the integration of a RESTful API with a responsive user interface while following a clean project structure.
+A full-stack Rock Paper Scissors web application built with a Java backend and a React frontend. The project demonstrates the integration of a RESTful API with a responsive user interface.
 
 ## Tech Stack
 
 ### Backend
 
-The backend is built with **Spring Boot** and uses **Gradle** as the build tool. It provides the game logic through REST endpoints and is responsible for:
+The backend is built with **Spring Boot** and uses **Gradle** as the build tool. It provides the game logic through one REST endpoint and is responsible for:
 
 - Processing game requests
 - Generating random computer moves
@@ -22,7 +22,7 @@ The backend is built with **Spring Boot** and uses **Gradle** as the build tool.
 
 ### Frontend
 
-The frontend is developed with **TypeScript** and styled using **Tailwind CSS**. It communicates with the backend via HTTP requests and provides an interactive user experience.
+The frontend is developed with **TypeScript** and styled using **Tailwind CSS**. It communicates with the backend via HTTP requests.
 
 **Technologies**
 
@@ -32,21 +32,6 @@ The frontend is developed with **TypeScript** and styled using **Tailwind CSS**.
 - HTML
 - Vite
 
-## Project Structure
-
-```text
-rock-paper-scissors/
-├── backend/
-│   ├── src/
-│   ├── build.gradle
-│   └── ...
-├── frontend/
-│   ├── src/
-│   ├── package.json
-│   ├── vite.config.ts
-│   └── ...
-└── README.md
-```
 
 ## Features
 
@@ -55,7 +40,6 @@ rock-paper-scissors/
 - Responsive UI using Tailwind CSS
 - Random computer move generation
 - Automatic winner calculation
-- Client-server architecture
 
 ## Getting Started
 
