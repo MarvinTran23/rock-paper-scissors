@@ -5,21 +5,36 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.myproject.rock_paper_scissor_game.rpsgame.enums.WinState;
+import com.myproject.rock_paper_scissor_game.rpsgame.gameLogik.GameResponse;
+import com.myproject.rock_paper_scissor_game.rpsgame.gameLogik.GameService;
+import com.myproject.rock_paper_scissor_game.rpsgame.gameLogik.SessionGameService;
 
-@SpringBootTest
+import jakarta.servlet.http.HttpSession;
+
+
 public class GameServiceTest {
-
-    @Autowired
+    
+    private Random random;
     private GameService gameService;
+    private HttpSession session;
+
+    @BeforeEach
+    void setup(){
+        random = mock(Random.class);
+        session = mock(HttpSession.class);
+
+        SessionGameService sessionGameService = mock(SessionGameService.class);
+
+        gameService = new GameService(sessionGameService, random);
+    }
 
     static Stream<org.junit.jupiter.params.provider.Arguments> gameCases() {
         return Stream.of(
@@ -37,14 +52,18 @@ public class GameServiceTest {
 
     @Test
     void playShouldAcceptRock() {
-        GameResponse response = gameService.play("rock");
+        when(random.nextInt(3)).thenReturn(0);
+
+        GameResponse response = gameService.play("rock", session);
 
         assertEquals("rock", response.player());
     }
 
     @Test
     void shouldAcceptUpperCaseInput() {
-        GameResponse response = gameService.play("ROCK");
+        when(random.nextInt(3)).thenReturn(0);
+
+        GameResponse response = gameService.play("ROCK", session);
 
         assertEquals("rock", response.player());
     }
@@ -52,7 +71,7 @@ public class GameServiceTest {
     @Test
     void invalidInputShouldThrowException() {
         assertThrows(IllegalArgumentException.class,
-            () -> gameService.play("banana")
+            () -> gameService.play("banana", session)
         );
     }
 
@@ -64,9 +83,12 @@ public class GameServiceTest {
         Random random = mock(Random.class);
         when(random.nextInt(3)).thenReturn(randomValue);
 
-        GameService service = new GameService(random);
+        SessionGameService sessionGameService = mock(SessionGameService.class);
+        HttpSession session = mock(HttpSession.class);
+        
+        GameService service = new GameService(sessionGameService, random);
 
-        GameResponse response = service.play(player);
+        GameResponse response = service.play(player, session);
 
         assertEquals(expected, response.result());
     }
