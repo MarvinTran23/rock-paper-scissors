@@ -1,1 +1,30 @@
 @import "tailwindcss";
+
+
+@keyframes rainbow-border {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+.rainbow-border {
+  border: 3px solid transparent;
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(
+      90deg,
+      red,
+      orange,
+      yellow,
+      lime,
+      cyan,
+      blue,
+      violet,
+      red
+    ) border-box;
+  background-size: 100% 100%, 200% 100%;
+  animation: rainbow-border 2s linear infinite;
+}
