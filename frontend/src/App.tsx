@@ -8,6 +8,8 @@ function App() {
   const [isRunning, setIsRunning] = useState(false);
   const [roundKey, setRoundKey] = useState(0);
   const [gameResult, setGameResult] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   let API_URL: string = `http://localhost:8080/api/play?choice=${picked}`;
 
@@ -16,6 +18,8 @@ function App() {
   const onFinish = async () => {
     setIsRunning(false);
     setFinalPick(picked);
+    setError(null);
+    setIsLoading(true);
 
     try {
       const response = await fetch(
@@ -25,12 +29,19 @@ function App() {
         }
       );
 
+      if (!response.ok) {
+        throw new Error("Server error");
+      }
+
       const data = await response.json();
       setGameResult(data);
       console.log("Backend response: ", data);
 
     } catch (error) {
       console.log(error);
+      setError("Backend not reachable ❌");
+    } finally {
+      setIsLoading(false);
     }
 
     console.log(`Time is over! Picked: ${picked}`);
@@ -71,7 +82,13 @@ function App() {
       {/* Countdown */}
       <div className="h-28 flex flex-col items-center justify-center text-center">
 
-        {isRunning && !gameResult && (
+        {error && (
+          <div className="text-red-500 font-bold text-lg">
+            {error}
+          </div>
+        )}
+
+        {!error && isRunning && !gameResult && (
           <Countdown
             key={roundKey}
             running={isRunning}
@@ -80,7 +97,7 @@ function App() {
           />
         )}
 
-        {!isRunning && gameResult && (
+        {!error && !isRunning && gameResult && (
           <div className="flex flex-col gap-1">
             <h2 className="text-3xl font-bold">
               {getResultText()}
@@ -95,7 +112,7 @@ function App() {
           </div>
         )}
 
-        {!isRunning && !gameResult && (
+        {!isLoading && !error && !isRunning && !gameResult && (
           <div className="text-lg text-gray-400">
             Choose your move:
           </div>
