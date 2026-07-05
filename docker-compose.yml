@@ -2,11 +2,26 @@ version: "3.9"
 
 services:
 
+  db: 
+    image: postgres:16
+    container_name: rps-db
+    environment:
+      POSTGRES_DB: rpsgame
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+
   backend:
     build: ./backend
+    environment:
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     container_name: spring-backend
     ports:
       - "8080:8080"
+    depends_on:
+      - db
 
   frontend:
     environment:
