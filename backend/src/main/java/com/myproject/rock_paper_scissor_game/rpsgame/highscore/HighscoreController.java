@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myproject.rock_paper_scissor_game.rpsgame.gameLogik.GameService;
@@ -28,15 +28,15 @@ public class HighscoreController {
     }
 
     @PostMapping("/finish")
-    public Highscore finish(@RequestParam String playerName, HttpSession session) {
-
+    public Highscore finish(@RequestBody HighscoreRequest request, HttpSession session) {
+        System.out.println(request.playerName());
         if (!sessionGameService.isGameOver(session)) {
             throw new IllegalStateException("You must lose at least once before finishing!");
         }
 
         int score = gameService.getScore(session);
 
-        Highscore saved = highscoreService.saveOrUpdate(playerName, score);
+        Highscore saved = highscoreService.saveOrUpdate(request.playerName(), score);
 
         gameService.reset(session);
 
