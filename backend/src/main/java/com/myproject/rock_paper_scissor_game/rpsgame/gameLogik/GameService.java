@@ -2,6 +2,7 @@ package com.myproject.rock_paper_scissor_game.rpsgame.gameLogik;
 
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myproject.rock_paper_scissor_game.rpsgame.enums.Move;
@@ -15,6 +16,7 @@ public class GameService {
     private final Random random;
     private final SessionGameService sessionGameService;
 
+    @Autowired
     public GameService(SessionGameService sessionGameService) {
         this.sessionGameService = sessionGameService;
         this.random = new Random();

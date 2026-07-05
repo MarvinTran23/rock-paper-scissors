@@ -11,7 +11,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  let API_URL: string = `http://localhost:8080/api/play?choice=${picked}`;
+  let API_URL: string = `http://localhost:8080/play?choice=${picked}`;
 
   const isFinished = finalPick !== null;
 
