@@ -1,72 +1,54 @@
 # Rock Paper Scissors
 
-A full-stack Rock Paper Scissors web application built with a Java backend and a React frontend. The project demonstrates the integration of a RESTful API with a responsive user interface.
+A full-stack Rock Paper Scissors web application built with a Java Spring Boot backend and a React frontend.  
+The project demonstrates a RESTful API architecture with a frontend UI and Docker-based PostgreSQL integration.
+
+---
 
 ## Tech Stack
 
 ### Backend
 
-The backend is built with **Spring Boot** and uses **Gradle** as the build tool. It provides the game logic through one REST endpoint and is responsible for:
+The backend is built with **Spring Boot** and uses **Gradle** as the build tool.  
+It provides the game logic through a REST API and handles:
 
 - Processing game requests
 - Generating random computer moves
-- Determining the winner of each round
-- Returning game results as JSON
+- Determining the winner
+- Returning results as JSON
+- Persisting data in PostgreSQL
 
-**Technologies**
+**Technologies:**
 
 - Java
 - Spring Boot
 - Spring Web
+- Spring Data JPA
+- PostgreSQL
 - Gradle
+
+---
 
 ### Frontend
 
-The frontend is developed with **TypeScript** and styled using **Tailwind CSS**. It communicates with the backend via HTTP requests.
+The frontend is built with **React + TypeScript** and styled using **Tailwind CSS**.  
+It communicates with the backend via HTTP requests.
 
-**Technologies**
+**Technologies:**
 
 - React
 - TypeScript
 - Tailwind CSS
-- HTML
 - Vite
+- HTML
 
+---
 
-## Features
+## Database & Docker Setup
 
-- RESTful API built with Spring Boot
-- Interactive frontend built with TypeScript
-- Responsive UI using Tailwind CSS
-- Random computer move generation
-- Automatic winner calculation
+This project uses PostgreSQL running in Docker.
 
-## Getting Started
-
-### Backend
+### Start the database
 
 ```bash
-cd backend
-./gradlew bootRun
-```
-
-The backend will start on the configured Spring Boot server.
-
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-The frontend will be available on the Vite development server.
-
-## Author
-
-Marvin Tran
-
-## License
-
-This project is licensed under the MIT License.
-
+docker-compose up -d
