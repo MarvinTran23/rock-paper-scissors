@@ -3,6 +3,10 @@
 A full-stack Rock Paper Scissors web application built with a Java Spring Boot backend and a React frontend.  
 The project demonstrates a RESTful API architecture with a frontend UI and Docker-based PostgreSQL integration.
 
+## Demo
+
+[Demo Video](rps_game_demo.mp4)
+
 ---
 
 ## Tech Stack
