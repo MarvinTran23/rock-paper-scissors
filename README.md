@@ -5,7 +5,7 @@ The project demonstrates a RESTful API architecture with a frontend UI and Docke
 
 ## Demo
 
-[Demo Video](rps_game_demo.mp4)
+[rps_game_demo.mp4](https://github.com/user-attachments/assets/68efa3f6-dca1-489b-8cd0-f0f891ae38bc)
 
 ---
 
