@@ -111,20 +111,14 @@ export default function Play() {
     }, [gameResult]);
 
     return (
-        <div className="
-            w-screen min-h-screen
-            flex flex-col items-center gap-6
-            justify-start
-            pt-10
-            sm:justify-center sm:pt-0
-            ">
-            <div className="mt-10 max-w-2xl mx-auto">
-                <h1 className="text-3xl font-bold text-center mb-8">
-                    Rock-Paper-Scissor-Game
-                </h1>
-            </div>
 
-            <p className="text-2xl font-bold text-12">
+        <div className="mt-10 max-w-2xl mx-auto">
+            <h1 className="text-3xl font-bold text-center mb-8">
+                Rock-Paper-Scissor-Game
+            </h1>
+
+
+            <p className="text-2xl font-bold text-center text-12">
                 Score: {highscore}
             </p>
 
