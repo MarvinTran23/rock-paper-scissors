@@ -51,7 +51,7 @@ It communicates with the backend via HTTP requests.
 
 ### Backend
 
-The backend is built with **Spring Boot** and uses **Gradle** as the build tool.  
+The backend is built with **Spring Boot** and uses **Gradle** as the build tool. **JUnit** and **Mockito** are used for automated testing to verify the game logic.
 It provides the game logic through a REST API and handles:
 
 - Processing player moves and calculating game results
