@@ -2,11 +2,11 @@
 
 ## Table of Content
 
-[Introduction](#introduction)
-[Architecture](#architecture)
-[Tech Stack](#tech-stack)
-[API Endpoints](#api-endpoints)
-[Start the Project](#start-the-project)
+* [Introduction](#introduction)
+* [Architecture](#architecture)
+* [Tech Stack](#tech-stack)
+* [API Endpoints](#api-endpoints)
+* [Start the Project](#start-the-project)
 
 ## Introduction
 
