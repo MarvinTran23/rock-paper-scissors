@@ -73,7 +73,7 @@ It provides the game logic through a REST API and handles:
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/play?choice={choice}` | Plays a game round with the player's choice |
-| POST | `/highscore/finish?playerName={name}` | Saves the player's final score after game over |
+| POST | `/highscore/finish` | Saves the player's final score using the request body. The endpoint is only available after game over, otherwise an error response is returned |
 | GET | `/highscore` | Retrieves the leaderboard |
 
 
